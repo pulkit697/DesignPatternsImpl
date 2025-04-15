@@ -1,5 +1,8 @@
-package src.ParkingLot.managers;
+package src.ParkingLot.managers.gates;
 
+import src.ParkingLot.managers.parkingManagers.FourWheelerParkingManager;
+import src.ParkingLot.managers.parkingManagers.ParkingManager;
+import src.ParkingLot.managers.parkingManagers.TwoWheelerParkingManager;
 import src.ParkingLot.models.VehicleType;
 
 public class Gate {

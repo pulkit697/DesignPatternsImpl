@@ -1,4 +1,4 @@
-package src.ParkingLot.managers;
+package src.ParkingLot.managers.parkingManagers;
 
 import src.ParkingLot.models.ParkingSlot;
 import src.ParkingLot.models.VehicleType;

@@ -1,7 +1,7 @@
 package src.ParkingLot;
 
-import src.ParkingLot.managers.EntryBooth;
-import src.ParkingLot.managers.ExitBooth;
+import src.ParkingLot.managers.gates.EntryBooth;
+import src.ParkingLot.managers.gates.ExitBooth;
 import src.ParkingLot.models.Ticket;
 import src.ParkingLot.models.Vehicle;
 import src.ParkingLot.models.VehicleType;
