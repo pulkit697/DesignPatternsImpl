@@ -9,9 +9,9 @@ public class ParkingManagerFactory {
     private static ParkingManagerFactory INSTANCE;
 
     public static ParkingManagerFactory getInstance() {
-        if (INSTANCE != null) {
+        if (INSTANCE == null) {
             synchronized(ParkingManagerFactory.class) {
-                if (INSTANCE != null) {
+                if (INSTANCE == null) {
                     INSTANCE = new ParkingManagerFactory();
                 }
             }
