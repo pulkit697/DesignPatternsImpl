@@ -1,26 +1,17 @@
 package src.ParkingLot.managers.gates;
 
-import src.ParkingLot.managers.parkingManagers.FourWheelerParkingManager;
 import src.ParkingLot.managers.parkingManagers.ParkingManager;
-import src.ParkingLot.managers.parkingManagers.TwoWheelerParkingManager;
+import src.ParkingLot.managers.parkingManagers.ParkingManagerFactory;
 import src.ParkingLot.models.VehicleType;
 
 public class Gate {
-    private final ParkingManager twoWheelerParkingManager;
-    private final ParkingManager fourWheelerParkingManager;
+    private final ParkingManagerFactory parkingManagerFactory;
 
     public Gate() {
-        twoWheelerParkingManager = new TwoWheelerParkingManager();
-        fourWheelerParkingManager = new FourWheelerParkingManager();
+        parkingManagerFactory = ParkingManagerFactory.getInstance();
     }
 
     protected ParkingManager getParkingManager(VehicleType vehicleType) {
-        switch (vehicleType) {
-            case TWO_WHEELER:
-                return twoWheelerParkingManager;
-            case FOUR_WHEELER:
-                return fourWheelerParkingManager;
-        }
-        return null;
+        return parkingManagerFactory.getParkingManager(vehicleType);
     }
 }
