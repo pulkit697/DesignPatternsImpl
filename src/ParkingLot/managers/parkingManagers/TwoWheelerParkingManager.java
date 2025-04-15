@@ -1,5 +1,6 @@
 package src.ParkingLot.managers.parkingManagers;
 
+import src.ParkingLot.managers.priceStrategy.HourlyWithMaxPriceStrategy;
 import src.ParkingLot.models.ParkingSlot;
 import src.ParkingLot.models.VehicleType;
 
@@ -7,9 +8,11 @@ import java.util.ArrayList;
 
 public class TwoWheelerParkingManager extends ParkingManager {
     private static final int SIZE = 20;
+    private static final int HOURLY_PRICE = 20;
+    private static final int MAX_PRICE = 100;
 
     public TwoWheelerParkingManager() {
-        super(SIZE);
+        super(SIZE, new HourlyWithMaxPriceStrategy(HOURLY_PRICE, MAX_PRICE));
     }
 
 

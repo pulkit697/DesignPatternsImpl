@@ -1,5 +1,6 @@
 package src.ParkingLot.managers.parkingManagers;
 
+import src.ParkingLot.managers.priceStrategy.PriceStrategy;
 import src.ParkingLot.models.ParkingSlot;
 import src.ParkingLot.models.Ticket;
 import src.ParkingLot.models.Vehicle;
@@ -10,9 +11,11 @@ import java.util.List;
 
 public abstract class ParkingManager {
     protected List<ParkingSlot> parkingSlots;
+    private final PriceStrategy pricingStrategy;
 
-    public ParkingManager(int size) {
+    public ParkingManager(int size, PriceStrategy priceStrategy) {
         initializeParkingSlots(size);
+        this.pricingStrategy = priceStrategy;
     }
 
     public abstract void initializeParkingSlots(int size);
@@ -49,10 +52,12 @@ public abstract class ParkingManager {
     }
 
     public int getBill(Ticket ticket) {
+        return pricingStrategy.calculateBill(getTimeElapsedInMinutes(ticket.getStartTime()));
+    }
+
+    private int getTimeElapsedInMinutes(Date startTime) {
         Date currentTime = Date.from(Instant.now());
-        Date startTime = ticket.getStartTime();
         long timeDifferenceInMillis = currentTime.getTime() - startTime.getTime();
-        int hoursPassed = (int) Math.ceil(timeDifferenceInMillis/(1000 * 60 * 60.0));
-        return 20 * hoursPassed;
+        return (int) Math.ceil(timeDifferenceInMillis/(1000 * 60.0));
     }
 }
