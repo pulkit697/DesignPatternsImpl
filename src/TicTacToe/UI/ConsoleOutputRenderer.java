@@ -38,4 +38,9 @@ public class ConsoleOutputRenderer implements OutputRenderer {
     public void displayTie() {
         System.out.println("OOPS! This round tied. Well Played!");
     }
+
+    @Override
+    public void displayMaxNumberOfPlayersSupported() {
+        System.out.println("Sorry, we support only upto " + CommonUtils.getMaxNumberOfPlayers()+ " players.");
+    }
 }

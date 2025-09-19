@@ -8,4 +8,5 @@ public interface OutputRenderer {
     void displayWinner(Player player);
     void displayIncorrectMove(String error);
     void displayTie();
+    void displayMaxNumberOfPlayersSupported();
 }

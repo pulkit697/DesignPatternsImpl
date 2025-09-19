@@ -4,6 +4,7 @@ import src.TicTacToe.exceptions.UnsupportedMoveException;
 import src.TicTacToe.interfaces.OutputRenderer;
 import src.TicTacToe.interfaces.InputTaker;
 import src.TicTacToe.models.Player;
+import src.TicTacToe.utils.CommonUtils;
 
 public class GameLoop {
     private int size = 3;
@@ -20,6 +21,10 @@ public class GameLoop {
     public void setUp() {
         size = inputTaker.getGridSize();
         numberOfPlayers = inputTaker.getNumberOfPlayers();
+        while (numberOfPlayers > CommonUtils.getMaxNumberOfPlayers()) {
+            outputRenderer.displayMaxNumberOfPlayersSupported();
+            numberOfPlayers = inputTaker.getNumberOfPlayers();
+        }
         Player[] players = new Player[numberOfPlayers];
         for (int i=0; i<numberOfPlayers; i++) {
             String name = inputTaker.getPlayerName();

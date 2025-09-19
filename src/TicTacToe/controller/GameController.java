@@ -7,7 +7,7 @@ import src.TicTacToe.utils.GameUtils;
 
 public class GameController {
     private final Grid grid;
-    private int numberOfVacantCells = 9;
+    private int numberOfVacantCells;
     private boolean isGameConcluded = false;
 
     private final Player[] players;
@@ -16,6 +16,7 @@ public class GameController {
     public GameController(int gridSize, Player[] players) {
         grid = new Grid(gridSize);
         this.players = players;
+        numberOfVacantCells = gridSize*gridSize;
     }
 
     public void play(int row, int col) throws UnsupportedMoveException {
