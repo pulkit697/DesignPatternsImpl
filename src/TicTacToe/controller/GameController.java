@@ -15,9 +15,10 @@ public class GameController {
 
     public GameController() {
         grid = new Grid(3);
-        for (int i=0; i<2; i++) {
-            players[i] = new Player();
-        }
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
     }
 
     public void play(int row, int col) throws UnsupportedMoveException {
@@ -27,8 +28,8 @@ public class GameController {
         if (!grid.getCell(row, col).isVacant()) {
             throw new UnsupportedMoveException("Cell already filled");
         }
-        grid.getCell(row, col).setPlayer(currentPlayer);
-        isGameConcluded = GameUtils.isGameConcluded(grid, row, col, currentPlayer);
+        grid.getCell(row, col).setPlayer(players[currentPlayer]);
+        isGameConcluded = GameUtils.isGameConcluded(grid, row, col, players[currentPlayer]);
     }
 
     public boolean isGameOver() {

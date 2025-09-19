@@ -5,7 +5,7 @@ import src.TicTacToe.utils.CommonUtils;
 
 public class Cell {
     private boolean isVacant;
-    private int player;
+    private Player player;
 
     public Cell() {
         this.isVacant = true;
@@ -15,7 +15,7 @@ public class Cell {
         return isVacant;
     }
 
-    public void setPlayer(int player) throws UnsupportedMoveException {
+    public void setPlayer(Player player) throws UnsupportedMoveException {
         if (!isVacant) {
             throw new UnsupportedMoveException("Illegal move.");
         }
@@ -23,15 +23,7 @@ public class Cell {
         this.player = player;
     }
 
-    public int getPlayer() {
+    public Player getPlayer() {
         return player;
-    }
-
-    @Override
-    public String toString() {
-        if (isVacant) {
-            return ".";
-        }
-        return "" + CommonUtils.getPlayerCharacter(player);
     }
 }

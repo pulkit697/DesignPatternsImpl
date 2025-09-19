@@ -9,7 +9,7 @@ public class ConsoleInputTaker implements PlayerInputTaker {
     
     @Override
     public int[] takePlayerInputCoordinates() {
-        System.out.println("Player, Enter row & col to fill: ");
+        System.out.print("Player, Enter row & col to fill: ");
         int x = scanner.nextInt();
         int y = scanner.nextInt();
         return new int[]{x, y};
@@ -17,6 +17,7 @@ public class ConsoleInputTaker implements PlayerInputTaker {
 
     @Override
     public String getName() {
+        System.out.print("Please enter your name: ");
         String name = scanner.next();
         return name;
     }

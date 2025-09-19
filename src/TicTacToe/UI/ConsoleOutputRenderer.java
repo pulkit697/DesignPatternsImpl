@@ -3,6 +3,7 @@ package src.TicTacToe.UI;
 import src.TicTacToe.interfaces.OutputRenderer;
 import src.TicTacToe.models.Grid;
 import src.TicTacToe.models.Player;
+import src.TicTacToe.utils.CommonUtils;
 
 public class ConsoleOutputRenderer implements OutputRenderer {
     
@@ -11,7 +12,12 @@ public class ConsoleOutputRenderer implements OutputRenderer {
         int size = grid.getSize();
         for (int i = 0; i<size; i++) {
             for (int j=0; j<size; j++) {
-                System.out.print(grid.getCell(i, j) + " ");
+                if (grid.getCell(i, j).isVacant()) {
+                    System.out.print(". ");
+                } else {
+                    char playerChar = CommonUtils.getPlayerCharacter(grid.getCell(i, j).getPlayer());
+                    System.out.print(playerChar + " ");
+                }
             }
             System.out.println();
         }
@@ -19,7 +25,8 @@ public class ConsoleOutputRenderer implements OutputRenderer {
 
     @Override
     public void displayWinner(Player p) {
-        System.out.println("Congratulations!! Player " + p.getName() + " has won!!");
+        char playerChar = CommonUtils.getPlayerCharacter(p);
+        System.out.println("Congratulations!! Player " + p.getName() + " (" + playerChar + ") has won!!");
     }
 
     @Override
