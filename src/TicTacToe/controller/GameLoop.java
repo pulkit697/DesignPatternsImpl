@@ -2,6 +2,7 @@ package src.TicTacToe.controller;
 
 import src.TicTacToe.exceptions.UnsupportedMoveException;
 import src.TicTacToe.interfaces.OutputRenderer;
+import src.TicTacToe.interfaces.WinEvaluationStrategy;
 import src.TicTacToe.interfaces.InputTaker;
 import src.TicTacToe.models.Player;
 import src.TicTacToe.utils.CommonUtils;
@@ -12,10 +13,12 @@ public class GameLoop {
     private GameController game;
     private final InputTaker inputTaker;
     private final OutputRenderer outputRenderer;
+    private final WinEvaluationStrategy winEvaluationStrategy;
 
-    public GameLoop(InputTaker inputTaker, OutputRenderer outputRenderer) {
+    public GameLoop(InputTaker inputTaker, OutputRenderer outputRenderer, WinEvaluationStrategy winEvaluationStrategy) {
         this.inputTaker = inputTaker;
         this.outputRenderer = outputRenderer;
+        this.winEvaluationStrategy = winEvaluationStrategy;
     }
 
     public void setUp() {
@@ -30,7 +33,7 @@ public class GameLoop {
             String name = inputTaker.getPlayerName();
             players[i] = new Player(name, i);
         }
-        game = new GameController(size, players);
+        game = new GameController(winEvaluationStrategy, size, players);
     }
 
     public void start() {

@@ -1,19 +1,21 @@
 package src.TicTacToe.controller;
 
 import src.TicTacToe.exceptions.UnsupportedMoveException;
+import src.TicTacToe.interfaces.WinEvaluationStrategy;
 import src.TicTacToe.models.Grid;
 import src.TicTacToe.models.Player;
-import src.TicTacToe.utils.GameUtils;
 
 public class GameController {
     private final Grid grid;
+    private final WinEvaluationStrategy winEvaluationStrategy;
     private int numberOfVacantCells;
     private boolean isGameConcluded = false;
 
     private final Player[] players;
     private int currentPlayer = 0;
 
-    public GameController(int gridSize, Player[] players) {
+    public GameController(WinEvaluationStrategy winEvaluationStrategy, int gridSize, Player[] players) {
+        this.winEvaluationStrategy = winEvaluationStrategy;
         grid = new Grid(gridSize);
         this.players = players;
         numberOfVacantCells = gridSize*gridSize;
@@ -27,7 +29,7 @@ public class GameController {
             throw new UnsupportedMoveException("Cell already filled");
         }
         grid.getCell(row, col).setPlayer(players[currentPlayer]);
-        isGameConcluded = GameUtils.isGameConcluded(grid, row, col, players[currentPlayer]);
+        isGameConcluded = winEvaluationStrategy.isGameConcluded(grid, row, col, players[currentPlayer]);
     }
 
     public boolean isGameOver() {
