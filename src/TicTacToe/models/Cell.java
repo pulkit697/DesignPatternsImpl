@@ -1,10 +1,11 @@
 package src.TicTacToe.models;
 
 import src.TicTacToe.exceptions.UnsupportedMoveException;
+import src.TicTacToe.utils.CommonUtils;
 
 public class Cell {
     private boolean isVacant;
-    private boolean parity;
+    private int player;
 
     public Cell() {
         this.isVacant = true;
@@ -14,36 +15,23 @@ public class Cell {
         return isVacant;
     }
 
-    public void setParity(boolean parity) throws UnsupportedMoveException {
+    public void setPlayer(int player) throws UnsupportedMoveException {
         if (!isVacant) {
-            throw new UnsupportedMoveException();
+            throw new UnsupportedMoveException("Illegal move.");
         }
         this.isVacant = false;
-        this.parity = parity;
+        this.player = player;
     }
 
-    public boolean getParity() {
-        return parity;
-    }
-
-    public void print() {
-        if (isVacant) {
-            System.out.print(" ");
-        } else if (parity) {
-            System.out.print("X");
-        } else {
-            System.out.print("O");
-        }
+    public int getPlayer() {
+        return player;
     }
 
     @Override
     public String toString() {
         if (isVacant) {
-            return " ";
-        } else if (parity) {
-            return "X";
-        } else {
-            return "O";
+            return ".";
         }
+        return "" + CommonUtils.getPlayerCharacter(player);
     }
 }

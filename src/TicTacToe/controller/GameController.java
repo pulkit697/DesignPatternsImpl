@@ -2,55 +2,50 @@ package src.TicTacToe.controller;
 
 import src.TicTacToe.exceptions.UnsupportedMoveException;
 import src.TicTacToe.models.Grid;
+import src.TicTacToe.models.Player;
 import src.TicTacToe.utils.GameUtils;
 
 public class GameController {
     private final Grid grid;
-    private boolean playerTurn = false;
     private int numberOfVacantCells = 9;
+    private boolean isGameConcluded = false;
+
+    private Player[] players = new Player[2];
+    private int currentPlayer = 0;
 
     public GameController() {
         grid = new Grid(3);
+        for (int i=0; i<2; i++) {
+            players[i] = new Player();
+        }
     }
 
-    public void play(int row, int col) {
+    public void play(int row, int col) throws UnsupportedMoveException {
         if (row<0 || row>=3 || col<0 || col>=3) {
-            System.out.println("Invalid cell location!");
-            return;
+            throw new UnsupportedMoveException("Invalid cell location!");
         }
         if (!grid.getCell(row, col).isVacant()) {
-            System.out.println("Cell already filled");
-            return;
+            throw new UnsupportedMoveException("Cell already filled");
         }
-        try {
-            grid.getCell(row, col).setParity(playerTurn);
-        } catch (UnsupportedMoveException e) {
-            System.out.println("Invalid move");
-            return;
-        }
-        boolean isGameConcluded = GameUtils.isGameConcluded(grid, row, col, playerTurn);
-        if (isGameConcluded) {
-            numberOfVacantCells = 0;
-            System.out.println("Congratulations!! Player '" + getCurrentPlayer() + "' has won!!");
-            return;
-        }
-        playerTurn = !playerTurn;
-        numberOfVacantCells--;
+        grid.getCell(row, col).setPlayer(currentPlayer);
+        isGameConcluded = GameUtils.isGameConcluded(grid, row, col, currentPlayer);
     }
 
     public boolean isGameOver() {
         return numberOfVacantCells==0;
     }
 
-    public char getCurrentPlayer() {
-        if (playerTurn) {
-            return 'X';
-        }
-        return 'O';
+    public boolean isGameConcluded() {
+        return isGameConcluded;
     }
 
-    public void display() {
-        grid.print();
+    public Player getCurrentPlayer() {
+        return players[currentPlayer];
+    }
+
+    public void nextTurn() {
+        currentPlayer = (currentPlayer + 1) % 2;
+        numberOfVacantCells--;
     }
 
     public Grid getGrid() {

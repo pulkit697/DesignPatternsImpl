@@ -14,28 +14,6 @@ public class Grid {
         }
     }
 
-    public void print() {
-        for (int i=0; i<size; i++) {
-            for (int j=0; j<size; j++) {
-                grid[i][j].print();
-                if (j<size-1) {
-                    System.out.print("|");
-                }
-            }
-            if (i<size-1) {
-                System.out.print("\n");
-                for (int j=0; j<size; j++) {
-                    if (j<size-1) {
-                        System.out.println("–+");
-                    } else {
-                        System.out.println("–");
-                    }
-                }
-            }
-        }
-        System.out.println("\n");
-    }
-
     public Cell getCell(int row, int col) {
         return grid[row][col];
     }
