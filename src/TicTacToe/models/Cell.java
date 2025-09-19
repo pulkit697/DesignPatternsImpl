@@ -35,4 +35,15 @@ public class Cell {
             System.out.print("O");
         }
     }
+
+    @Override
+    public String toString() {
+        if (isVacant) {
+            return " ";
+        } else if (parity) {
+            return "X";
+        } else {
+            return "O";
+        }
+    }
 }

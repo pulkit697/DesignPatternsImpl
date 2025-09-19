@@ -1,23 +1,16 @@
-package src.TicTacToe.models;
+package src.TicTacToe.controller;
 
 import src.TicTacToe.exceptions.UnsupportedMoveException;
+import src.TicTacToe.models.Grid;
 import src.TicTacToe.utils.GameUtils;
 
-public class Game {
-    private final Cell[][] grid = new Cell[3][3];
+public class GameController {
+    private final Grid grid;
     private boolean playerTurn = false;
     private int numberOfVacantCells = 9;
 
-    public Game() {
-        for (int i=0; i<3; i++) {
-            for (int j=0; j<3; j++) {
-                grid[i][j] = new Cell();
-            }
-        }
-    }
-
-    public Cell[][] getGrid() {
-        return grid;
+    public GameController() {
+        grid = new Grid(3);
     }
 
     public void play(int row, int col) {
@@ -25,12 +18,12 @@ public class Game {
             System.out.println("Invalid cell location!");
             return;
         }
-        if (!grid[row][col].isVacant()) {
+        if (!grid.getCell(row, col).isVacant()) {
             System.out.println("Cell already filled");
             return;
         }
         try {
-            grid[row][col].setParity(playerTurn);
+            grid.getCell(row, col).setParity(playerTurn);
         } catch (UnsupportedMoveException e) {
             System.out.println("Invalid move");
             return;
@@ -39,6 +32,7 @@ public class Game {
         if (isGameConcluded) {
             numberOfVacantCells = 0;
             System.out.println("Congratulations!! Player '" + getCurrentPlayer() + "' has won!!");
+            return;
         }
         playerTurn = !playerTurn;
         numberOfVacantCells--;
@@ -53,5 +47,13 @@ public class Game {
             return 'X';
         }
         return 'O';
+    }
+
+    public void display() {
+        grid.print();
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }

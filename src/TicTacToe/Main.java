@@ -1,21 +1,23 @@
 package src.TicTacToe;
 
-import src.TicTacToe.models.Game;
-import src.TicTacToe.utils.GameUtils;
-
-import java.util.Scanner;
+import src.TicTacToe.UI.ConsoleInputTaker;
+import src.TicTacToe.UI.ConsoleOutputRenderer;
+import src.TicTacToe.controller.GameController;
+import src.TicTacToe.interfaces.OutputRenderer;
+import src.TicTacToe.interfaces.PlayerInputTaker;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Game game = new Game();
+        PlayerInputTaker playerInputTaker = new ConsoleInputTaker();
+        OutputRenderer outputRenderer = new ConsoleOutputRenderer();
+
+        GameController game = new GameController();
 
         while (!game.isGameOver()) {
-            GameUtils.printGrid(game.getGrid());
-            System.out.print("(Player '" + game.getCurrentPlayer() + "') Enter row & col to fill: ");
-            int row = scanner.nextInt();
-            int col = scanner.nextInt();
-            game.play(row, col);
+            int[] coordinates = playerInputTaker.takePlayerInputCoordinates();
+            
+            game.play(coordinates[0], coordinates[1]);
+            outputRenderer.render(game.getGrid());
         }
     }
 }
