@@ -4,11 +4,11 @@ import src.TicTacToe.UI.ConsoleInputTaker;
 import src.TicTacToe.UI.ConsoleOutputRenderer;
 import src.TicTacToe.controller.GameLoop;
 import src.TicTacToe.interfaces.OutputRenderer;
-import src.TicTacToe.interfaces.PlayerInputTaker;
+import src.TicTacToe.interfaces.InputTaker;
 
 public class Main {
     public static void main(String[] args) {
-        PlayerInputTaker playerInputTaker = new ConsoleInputTaker();
+        InputTaker playerInputTaker = new ConsoleInputTaker();
         OutputRenderer outputRenderer = new ConsoleOutputRenderer();
 
         GameLoop gameLoop = new GameLoop(playerInputTaker, outputRenderer);

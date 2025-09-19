@@ -10,7 +10,7 @@ public class GameUtils {
     }
 
     private static boolean isRowComplete(Grid grid, int row, Player player) {
-        for (int j=0; j<3; j++) {
+        for (int j=0; j<grid.getSize(); j++) {
             if (grid.getCell(row,j).isVacant() || grid.getCell(row,j).getPlayer() != player) {
                 return false;
             }
@@ -19,7 +19,7 @@ public class GameUtils {
     }
 
     private static boolean isColComplete(Grid grid, int col, Player player) {
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<grid.getSize(); i++) {
             if (grid.getCell(i,col).isVacant() || grid.getCell(i,col).getPlayer() != player) {
                 return false;
             }
@@ -29,7 +29,7 @@ public class GameUtils {
 
     private static boolean isLeftDiagComplete(Grid grid, int row, int col, Player player) {
         if (row != col) return false;
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<grid.getSize(); i++) {
             if (grid.getCell(i, i).isVacant() || grid.getCell(i, i).getPlayer() != player) {
                 return false;
             }
@@ -38,9 +38,9 @@ public class GameUtils {
     }
 
     private static boolean isRightDiagComplete(Grid grid, int row, int col, Player player) {
-        if (row+col != 2) return false;
-        for (int i=0; i<3; i++) {
-            if (grid.getCell(i,2-i).isVacant() || grid.getCell(i,2-i).getPlayer() != player) {
+        if (row+col != grid.getSize()-1) return false;
+        for (int i=0; i<grid.getSize(); i++) {
+            if (grid.getCell(i,grid.getSize()-1-i).isVacant() || grid.getCell(i,grid.getSize()-1-i).getPlayer() != player) {
                 return false;
             }
         }

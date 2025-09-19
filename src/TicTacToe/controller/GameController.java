@@ -10,19 +10,16 @@ public class GameController {
     private int numberOfVacantCells = 9;
     private boolean isGameConcluded = false;
 
-    private Player[] players = new Player[2];
+    private final Player[] players;
     private int currentPlayer = 0;
 
-    public GameController() {
-        grid = new Grid(3);
-    }
-
-    public void setPlayers(Player[] players) {
+    public GameController(int gridSize, Player[] players) {
+        grid = new Grid(gridSize);
         this.players = players;
     }
 
     public void play(int row, int col) throws UnsupportedMoveException {
-        if (row<0 || row>=3 || col<0 || col>=3) {
+        if (row<0 || row>=grid.getSize() || col<0 || col>=grid.getSize()) {
             throw new UnsupportedMoveException("Invalid cell location!");
         }
         if (!grid.getCell(row, col).isVacant()) {
@@ -45,7 +42,7 @@ public class GameController {
     }
 
     public void nextTurn() {
-        currentPlayer = (currentPlayer + 1) % 2;
+        currentPlayer = (currentPlayer + 1) % players.length;
         numberOfVacantCells--;
     }
 

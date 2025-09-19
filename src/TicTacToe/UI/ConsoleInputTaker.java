@@ -2,11 +2,11 @@ package src.TicTacToe.UI;
 
 import java.util.Scanner;
 
-import src.TicTacToe.interfaces.PlayerInputTaker;
+import src.TicTacToe.interfaces.InputTaker;
 import src.TicTacToe.models.Player;
 import src.TicTacToe.utils.CommonUtils;
 
-public class ConsoleInputTaker implements PlayerInputTaker {
+public class ConsoleInputTaker implements InputTaker {
     private static final Scanner scanner = new Scanner(System.in);
     
     @Override
@@ -19,10 +19,24 @@ public class ConsoleInputTaker implements PlayerInputTaker {
     }
 
     @Override
-    public String getName() {
+    public String getPlayerName() {
         System.out.print("Please enter your name: ");
         String name = scanner.next();
         return name;
+    }
+
+    @Override
+    public int getGridSize() {
+        System.out.print("Please enter size of grid: ");
+        int size = scanner.nextInt();
+        return size;
+    }
+
+    @Override
+    public int getNumberOfPlayers() {
+        System.out.print("Please enter number of players: ");
+        int numberOfPlayers = scanner.nextInt();
+        return numberOfPlayers;
     }
 
 }
