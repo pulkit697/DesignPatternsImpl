@@ -27,7 +27,7 @@ public class GameLoop {
     public void start() {
         while (!game.isGameOver()) {
             try {
-                int[] coordinates = playerInputTaker.takePlayerInputCoordinates();
+                int[] coordinates = playerInputTaker.takePlayerInputCoordinates(game.getCurrentPlayer());
                 game.play(coordinates[0], coordinates[1]);
                 outputRenderer.displayGrid(game.getGrid());
                 if (game.isGameConcluded()) {

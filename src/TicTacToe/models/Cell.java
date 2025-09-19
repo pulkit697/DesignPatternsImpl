@@ -1,7 +1,6 @@
 package src.TicTacToe.models;
 
 import src.TicTacToe.exceptions.UnsupportedMoveException;
-import src.TicTacToe.utils.CommonUtils;
 
 public class Cell {
     private boolean isVacant;
