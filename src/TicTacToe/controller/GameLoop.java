@@ -47,12 +47,11 @@ public class GameLoop {
                     outputRenderer.displayWinner(winner);
                     break;
                 }
-                game.nextTurn();
             } catch (UnsupportedMoveException e) {
                 outputRenderer.displayIncorrectMove(e.getMessage());
             }
         }
-        if (game.isGameOver()) {
+        if (game.isGameTied()) {
             outputRenderer.displayTie();
         }
     }

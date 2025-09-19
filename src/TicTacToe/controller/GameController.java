@@ -8,7 +8,7 @@ import src.TicTacToe.models.Player;
 public class GameController {
     private final Grid grid;
     private final WinEvaluationStrategy winEvaluationStrategy;
-    private int numberOfVacantCells;
+    private int numberOfMovesRemaining;
     private boolean isGameConcluded = false;
 
     private final Player[] players;
@@ -18,7 +18,7 @@ public class GameController {
         this.winEvaluationStrategy = winEvaluationStrategy;
         grid = new Grid(gridSize);
         this.players = players;
-        numberOfVacantCells = gridSize*gridSize;
+        numberOfMovesRemaining = gridSize*gridSize;
     }
 
     public void play(int row, int col) throws UnsupportedMoveException {
@@ -30,10 +30,17 @@ public class GameController {
         }
         grid.getCell(row, col).setPlayer(players[currentPlayer]);
         isGameConcluded = winEvaluationStrategy.isGameConcluded(grid, row, col, players[currentPlayer]);
+        if (!isGameConcluded) {
+            nextTurn();
+        }
     }
 
     public boolean isGameOver() {
-        return numberOfVacantCells==0;
+        return numberOfMovesRemaining==0 || isGameConcluded;
+    }
+
+    public boolean isGameTied() {
+        return !isGameConcluded && numberOfMovesRemaining == 0;
     }
 
     public boolean isGameConcluded() {
@@ -44,9 +51,9 @@ public class GameController {
         return players[currentPlayer];
     }
 
-    public void nextTurn() {
+    private void nextTurn() {
         currentPlayer = (currentPlayer + 1) % players.length;
-        numberOfVacantCells--;
+        numberOfMovesRemaining--;
     }
 
     public Grid getGrid() {
