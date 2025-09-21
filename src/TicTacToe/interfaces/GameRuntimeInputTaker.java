@@ -2,9 +2,6 @@ package src.TicTacToe.interfaces;
 
 import src.TicTacToe.models.Player;
 
-public interface InputTaker {
+public interface GameRuntimeInputTaker {
     int[] takePlayerInputCoordinates(Player p);
-    String getPlayerName();
-    int getGridSize();
-    int getNumberOfPlayers();
 }
